@@ -5,7 +5,7 @@ import _BaseProgress as base
 
 
 class Bar(base.BaseProgress):
-    def __init__(self, max_value: int = 100, current_value: int = 0, increment_by: float = 1, prefix: str = '', suffix: str = '', bar_width: int = 32, fill: str = '#', empty_fill: str = ' ', bar_prefix='|', bar_suffix='|'):
+    def __init__(self, max_value: int = 100, current_value: int = 0, increment_by: float = 1, prefix: str = '', suffix: str = '', bar_width: int = 32, fill: str = '#', empty_fill: str = ' ', bar_prefix: str = '|', bar_suffix: str = '|'):
         self._prefix = prefix
         self._suffix = suffix
         self._bar_width = bar_width
