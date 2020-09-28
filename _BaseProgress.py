@@ -42,6 +42,20 @@ class BaseProgress(base.Base):
         self._increment_by = val
 
     @property
+    def cap_value(self) -> bool:
+        return self._cap_value
+
+    @cap_value.setter
+    def cap_value(self, cap: bool) -> None:
+        if cap == self._cap_value:
+            return
+
+        self._cap_value = cap
+
+        # Cap the current value if necessary
+        self.current_value = self.current_value
+
+    @property
     def progress(self) -> float:
         return self._current_value / self._max_value
 
