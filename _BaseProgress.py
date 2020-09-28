@@ -28,7 +28,10 @@ class BaseProgress(base.Base):
 
     @current_value.setter
     def current_value(self, val: float) -> None:
-        self._current_value = min(self._max_value, val)
+        if self._cap_value:
+            self._current_value = min(self._max_value, val)
+        else:
+            self._current_value = val
 
     @property
     def increment_by(self) -> float:
