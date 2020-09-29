@@ -4,7 +4,7 @@ import math
 import Bar
 
 
-class ChargingBar(Bar.Bar):
+class IncrementalBar(Bar.Bar):
     def __init__(self, max_value: int = 100, current_value: int = 0, increment_by: float = 1, prefix: str = '', suffix: str = '', bar_width: int = 32, fill: str = '█', fill_stages: typing.List[str] = [' ', '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'], empty_fill: str = ' ', bar_prefix: str = '|', bar_suffix: str = '|'):
         self._fill_stages = fill_stages
 
