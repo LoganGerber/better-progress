@@ -15,9 +15,11 @@ class _EndStringFormatter(string.Formatter):
 class Bar(base.BaseProgress):
     _FORMATTER = _EndStringFormatter()
 
-    def __init__(self, max_value: int = 100, current_value: int = 0, increment_by: float = 1, prefix: str = '', suffix: str = '', bar_width: int = 32, fill: str = '#', empty_fill: str = ' ', bar_prefix: str = '|', bar_suffix: str = '|'):
+    def __init__(self, max_value: int = 100, current_value: int = 0, increment_by: float = 1, prefix: str = '', prefix_kwargs: dict = {}, suffix: str = '', suffix_kwargs: dict = {}, bar_width: int = 32, fill: str = '#', empty_fill: str = ' ', bar_prefix: str = '|', bar_suffix: str = '|'):
         self._prefix = prefix if prefix else ''
+        self._prefix_kwargs = prefix_kwargs if prefix_kwargs else {}
         self._suffix = suffix if suffix else ''
+        self._suffix_kwargs = suffix_kwargs if suffix_kwargs else {}
         self._bar_width = bar_width
         self._fill = fill
         self._empty_fill = empty_fill
@@ -29,10 +31,8 @@ class Bar(base.BaseProgress):
     def __str__(self):
         filled = math.floor(self._bar_width * self.progress)
         empty = self._bar_width - filled
-        prefix = self._formatEnd(
-            self._prefix + ' ') if self._prefix != '' else ''
-        suffix = self._formatEnd(
-            ' ' + self._suffix) if self._suffix != '' else ''
+        prefix = self._format_prefix() if self._prefix != '' else ''
+        suffix = self._format_suffix() if self._suffix != '' else ''
         return prefix + self._bar_prefix + (self._fill * filled) + (self._empty_fill * empty) + self._bar_suffix + suffix
 
     @property
@@ -91,5 +91,16 @@ class Bar(base.BaseProgress):
     def bar_suffix(self, val: str) -> None:
         self._bar_suffix = val
 
-    def _formatEnd(self, end: str) -> str:
-        return Bar._FORMATTER.format(end, percent=(str(self.progress * 100) + '%'), current_value=self.current_value, max_value=self.max_value, remaining=self.remaining)
+    def _format_prefix(self) -> str:
+        return self._format_end(self._prefix, self._prefix_kwargs) + ' '
+
+    def _format_suffix(self) -> str:
+        return ' ' + self._format_end(self._suffix, self._suffix_kwargs)
+
+    def _format_end(self, end, relevant_kwargs: dict) -> str:
+        return Bar._FORMATTER.format(end,
+                                     percent=(str(self.progress * 100) + '%'),
+                                     current_value=self.current_value,
+                                     max_value=self.max_value,
+                                     remaining=self.remaining,
+                                     **relevant_kwargs)
