@@ -3,12 +3,12 @@ import abc
 import _Base as base
 
 
-class BaseProgress(base.Base):
+class BaseProgress(abc.ABC):
     def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):
         self._max_value = max_value
+        self._current_value = current_value
+        self._increment_by = increment_by
         self._cap_value = cap_value
-
-        super().__init__(current_value, increment_by)
 
     @abc.abstractmethod
     def __str__(self):
@@ -68,5 +68,6 @@ class BaseProgress(base.Base):
         return self._max_value - self._current_value
 
     def next(self):
-        if super().next() > self._max_value and self._cap_value:
+        self._current_value += self._increment_by
+        if self._cap_value and self._current_value > self._max_value:
             self._current_value = self._max_value
