@@ -1,7 +1,5 @@
 import abc
 
-import _Base as base
-
 
 class BaseProgress(abc.ABC):
     def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):

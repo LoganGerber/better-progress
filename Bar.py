@@ -16,16 +16,16 @@ class _EndStringFormatter(string.Formatter):
 class Bar(base.BaseProgress):
     _FORMATTER = _EndStringFormatter()
 
-    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, prefix: str = '', prefix_kwargs: dict = {}, suffix: str = '', suffix_kwargs: dict = {}, bar_width: int = 32, fill: str = '#', empty_fill: str = ' ', bar_prefix: str = '|', bar_suffix: str = '|'):
-        self._prefix = prefix if prefix else ''
-        self._prefix_kwargs = prefix_kwargs if prefix_kwargs else {}
-        self._suffix = suffix if suffix else ''
-        self._suffix_kwargs = suffix_kwargs if suffix_kwargs else {}
-        self._bar_width = bar_width
-        self._fill = fill
-        self._empty_fill = empty_fill
-        self._bar_prefix = bar_prefix
-        self._bar_suffix = bar_suffix
+    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):
+        self._prefix: str = ''
+        self._prefix_kwargs: dict = {}
+        self._suffix: str = ''
+        self._suffix_kwargs: dict = {}
+        self._bar_width: int = 32
+        self._fill_character: str = '#'
+        self._empty_character: str = ' '
+        self._bar_prefix: str = '|'
+        self._bar_suffix: str = '|'
 
         super().__init__(max_value, current_value, increment_by)
 
@@ -34,7 +34,7 @@ class Bar(base.BaseProgress):
         empty = self._bar_width - filled
         prefix = self._format_prefix() if self._prefix != '' else ''
         suffix = self._format_suffix() if self._suffix != '' else ''
-        return prefix + self._bar_prefix + (self._fill * filled) + (self._empty_fill * empty) + self._bar_suffix + suffix
+        return prefix + self._bar_prefix + (self._fill_character * filled) + (self._empty_character * empty) + self._bar_suffix + suffix
 
     @property
     def prefix(self) -> str:
@@ -115,11 +115,12 @@ class Bar(base.BaseProgress):
 
 
 class IncrementalBar(Bar):
-    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, prefix: str = '', prefix_kwargs: dict = {}, suffix: str = '', suffix_kwargs: dict = {}, bar_width: int = 32, fill: str = '█', fill_stages: typing.List[str] = [' ', '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'], empty_fill: str = ' ', bar_prefix: str = '|', bar_suffix: str = '|'):
-        self._fill_stages = fill_stages
+    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False, prefix: str = '', prefix_kwargs: dict = {}, suffix: str = '', suffix_kwargs: dict = {}, bar_width: int = 32, fill: str = '█', fill_stages: typing.List[str] = [' ', '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'], empty_fill: str = ' ', bar_prefix: str = '|', bar_suffix: str = '|'):
+        super().__init__(max_value, current_value, increment_by, cap_value)
 
-        super().__init__(max_value, current_value, increment_by, prefix, prefix_kwargs,
-                         suffix, suffix_kwargs, bar_width, fill, empty_fill, bar_prefix, bar_suffix)
+        self._fill_stages: typing.List[str] = [
+            ' ', '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█']
+        self.prefix
 
     def __str__(self):
         filled = self._bar_width * self.progress
