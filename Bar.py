@@ -16,7 +16,7 @@ class _EndStringFormatter(string.Formatter):
 class Bar(base.BaseProgress):
     _FORMATTER = _EndStringFormatter()
 
-    def __init__(self, max_value: int = 100, current_value: int = 0, increment_by: float = 1, prefix: str = '', prefix_kwargs: dict = {}, suffix: str = '', suffix_kwargs: dict = {}, bar_width: int = 32, fill: str = '#', empty_fill: str = ' ', bar_prefix: str = '|', bar_suffix: str = '|'):
+    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, prefix: str = '', prefix_kwargs: dict = {}, suffix: str = '', suffix_kwargs: dict = {}, bar_width: int = 32, fill: str = '#', empty_fill: str = ' ', bar_prefix: str = '|', bar_suffix: str = '|'):
         self._prefix = prefix if prefix else ''
         self._prefix_kwargs = prefix_kwargs if prefix_kwargs else {}
         self._suffix = suffix if suffix else ''
@@ -108,11 +108,11 @@ class Bar(base.BaseProgress):
 
 
 class IncrementalBar(Bar):
-    def __init__(self, max_value: int = 100, current_value: int = 0, increment_by: float = 1, prefix: str = '', suffix: str = '', bar_width: int = 32, fill: str = '█', fill_stages: typing.List[str] = [' ', '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'], empty_fill: str = ' ', bar_prefix: str = '|', bar_suffix: str = '|'):
+    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, prefix: str = '', prefix_kwargs: dict = {}, suffix: str = '', suffix_kwargs: dict = {}, bar_width: int = 32, fill: str = '█', fill_stages: typing.List[str] = [' ', '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'], empty_fill: str = ' ', bar_prefix: str = '|', bar_suffix: str = '|'):
         self._fill_stages = fill_stages
 
-        super().__init__(max_value, current_value, increment_by, prefix,
-                         suffix, bar_width, fill, empty_fill, bar_prefix, bar_suffix)
+        super().__init__(max_value, current_value, increment_by, prefix, prefix_kwargs,
+                         suffix, suffix_kwargs, bar_width, fill, empty_fill, bar_prefix, bar_suffix)
 
     def __str__(self):
         filled = self._bar_width * self.progress
