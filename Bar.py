@@ -43,6 +43,7 @@ class Bar(base.BaseProgress):
     @prefix.setter
     def prefix(self, val: str) -> None:
         self._prefix = val if val else ''
+        return self
 
     @property
     def suffix(self) -> str:
@@ -51,6 +52,7 @@ class Bar(base.BaseProgress):
     @suffix.setter
     def suffix(self, val: str) -> None:
         self._suffix = val if val else ''
+        return self
 
     @property
     def bar_width(self) -> int:
@@ -59,6 +61,7 @@ class Bar(base.BaseProgress):
     @bar_width.setter
     def bar_width(self, val: int) -> None:
         self._bar_width = val
+        return self
 
     @property
     def fill(self) -> str:
@@ -67,6 +70,7 @@ class Bar(base.BaseProgress):
     @fill.setter
     def fill(self, val: str) -> None:
         self._fill = val
+        return self
 
     @property
     def empty_fill(self) -> str:
@@ -75,6 +79,7 @@ class Bar(base.BaseProgress):
     @empty_fill.setter
     def empty_fill(self, val: str) -> None:
         self._empty_fill = val
+        return self
 
     @property
     def bar_prefix(self) -> str:
@@ -83,6 +88,7 @@ class Bar(base.BaseProgress):
     @bar_prefix.setter
     def bar_prefix(self, val: str) -> None:
         self._bar_prefix = val
+        return self
 
     @property
     def bar_suffix(self) -> str:
@@ -91,6 +97,7 @@ class Bar(base.BaseProgress):
     @bar_suffix.setter
     def bar_suffix(self, val: str) -> None:
         self._bar_suffix = val
+        return self
 
     def _format_prefix(self) -> str:
         return self._format_end(self._prefix, self._prefix_kwargs) + ' '
@@ -129,3 +136,4 @@ class IncrementalBar(Bar):
     @fill_stages.setter
     def fill_stages(self, stages: typing.List[str]) -> None:
         self._fill_stages = stages
+        return self

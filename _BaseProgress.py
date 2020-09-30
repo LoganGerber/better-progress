@@ -21,6 +21,7 @@ class BaseProgress(base.Base):
     @max_value.setter
     def max_value(self, val: float) -> None:
         self._max_value = val
+        return self
 
     @property
     def current_value(self) -> float:
@@ -32,6 +33,7 @@ class BaseProgress(base.Base):
             self._current_value = min(self._max_value, val if val else 0)
         else:
             self._current_value = val if val else 0
+        return self
 
     @property
     def increment_by(self) -> float:
@@ -40,6 +42,7 @@ class BaseProgress(base.Base):
     @increment_by.setter
     def increment_by(self, val: float) -> None:
         self._increment_by = val
+        return self
 
     @property
     def cap_value(self) -> bool:
@@ -54,6 +57,7 @@ class BaseProgress(base.Base):
 
         # Cap the current value if necessary
         self.current_value = self.current_value
+        return self
 
     @property
     def progress(self) -> float:
