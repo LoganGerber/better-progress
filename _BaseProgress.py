@@ -31,6 +31,8 @@ class BaseProgress(abc.ABC):
     def max_value(self, val: Optional[float] = None) -> Union[BaseProgress, float]:
         if val:
             self._max_value = val
+            # Cap the current value if necessary
+            self.current_value(self.current_value())
             return self
         return self._max_value
 
