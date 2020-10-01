@@ -18,5 +18,17 @@ class Spinner(IPrefixSuffix):
 
         return prefix + self._stages[self._current_stage] + suffix
 
+    def stages(self, val: Optional[Tuple[str]] = None) -> Union[Tuple[str], Spinner]:
+        if val != None:
+            self._stages = val
+            return self
+        return self._stages
+
+    def current_stage(self, val: Optional[int] = None) -> Union[int, Spinner]:
+        if val != None:
+            self._current_stage = val
+            return self
+        return self._current_stage
+
     def next(self):
         self._current_stage = (self._current_stage + 1) % len(self._stages)
