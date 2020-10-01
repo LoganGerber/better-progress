@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Tuple, Optional, Union
 
 from _IPrefixSuffix import IPrefixSuffix
 
