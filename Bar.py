@@ -19,8 +19,12 @@ class Bar(BaseProgress):
     def __str__(self):
         filled = math.floor(self._bar_width * self.progress)
         empty = self._bar_width - filled
-        prefix = self._format_prefix() if self._prefix != '' else ''
-        suffix = self._format_suffix() if self._suffix != '' else ''
+        prefix = self.formatted_prefix
+        if prefix != '':
+            prefix = prefix + ' '
+        suffix = self.formatted_suffix
+        if suffix != '':
+            suffix = ' ' + suffix
         bar_prefix = self._custom_format(self._bar_prefix, {})
         bar_suffix = self._custom_format(self._bar_suffix, {})
         return prefix + bar_prefix + (self._fill_character * filled) + (self._empty_character * empty) + bar_suffix + suffix

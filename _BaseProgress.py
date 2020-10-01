@@ -93,16 +93,18 @@ class BaseProgress(abc.ABC):
     def remaining(self) -> float:
         return self._max_value - self._current_value
 
+    @property
+    def formatted_prefix(self) -> str:
+        return self._custom_format(self._suffix, self._suffix_kwargs)
+
+    @property
+    def formatted_suffix(self) -> str:
+        return self._custom_format(self._suffix, self._suffix_kwargs)
+
     def next(self):
         self._current_value += self._increment_by
         if self._cap_value and self._current_value > self._max_value:
             self._current_value = self._max_value
-
-    def _format_prefix(self) -> str:
-        return self._custom_format(self._prefix, self._prefix_kwargs) + ' '
-
-    def _format_suffix(self) -> str:
-        return ' ' + self._custom_format(self._suffix, self._suffix_kwargs)
 
     def _custom_format(self, end, relevant_kwargs: dict) -> str:
         return BaseProgress._FORMATTER.format(end,
