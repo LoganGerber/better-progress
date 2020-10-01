@@ -28,13 +28,13 @@ class BaseProgress(abc.ABC):
     def __str__(self):
         return '{} / {}'.format(self._current_value, self._max_value)
 
-    def max_value(self, val: Union[float, None] = None) -> Union[float, BaseProgress]:
+    def max_value(self, val: Optional[float] = None) -> Union[BaseProgress, float]:
         if val:
             self._max_value = val
             return self
         return self._max_value
 
-    def current_value(self, val: Union[float, None] = None) -> Union[BaseProgress, None]:
+    def current_value(self, val: Optional[float] = None) -> Union[BaseProgress, float]:
         if val:
             if self._cap_value:
                 self._current_value = min(self._max_value, val)
@@ -43,13 +43,13 @@ class BaseProgress(abc.ABC):
             return self
         return self._current_value
 
-    def increment_by(self, val: Union[float, None] = None) -> Union[BaseProgress, None]:
+    def increment_by(self, val: Optional[float] = None) -> Union[BaseProgress, float]:
         if val:
             self._increment_by = val
             return self
         return self._increment_by
 
-    def cap_value(self, cap: Union[bool, None]) -> Union[BaseProgress, None]:
+    def cap_value(self, cap: Optional[bool]) -> Union[BaseProgress, bool]:
         if cap == self._cap_value:
             return
 
