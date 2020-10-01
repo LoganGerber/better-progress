@@ -29,7 +29,7 @@ class BaseProgress(abc.ABC):
         return '{} / {}'.format(self._current_value, self._max_value)
 
     def max_value(self, val: Optional[float] = None) -> Union[BaseProgress, float]:
-        if val:
+        if val != None:
             self._max_value = val
             # Cap the current value if necessary
             self.current_value(self.current_value())
@@ -37,7 +37,7 @@ class BaseProgress(abc.ABC):
         return self._max_value
 
     def current_value(self, val: Optional[float] = None) -> Union[BaseProgress, float]:
-        if val:
+        if val != None:
             if self._cap_value:
                 self._current_value = min(self._max_value, val)
             else:
@@ -46,7 +46,7 @@ class BaseProgress(abc.ABC):
         return self._current_value
 
     def increment_by(self, val: Optional[float] = None) -> Union[BaseProgress, float]:
-        if val:
+        if val != None:
             self._increment_by = val
             return self
         return self._increment_by
@@ -64,27 +64,27 @@ class BaseProgress(abc.ABC):
         return self._cap_value
 
     def prefix(self, val: Optional[str] = None, **kwargs) -> Union[BaseProgress, str]:
-        if val:
+        if val != None:
             self._prefix = str(val)
             self._prefix_kwargs = kwargs
             return self
         return self._prefix
 
     def prefix_kwargs(self, val: Optional[dict] = None) -> Union[BaseProgress, dict]:
-        if val:
+        if val != None:
             self._prefix_kwargs = dict(val)
             return self
         return self._prefix_kwargs
 
     def suffix(self, val: Optional[str] = None, **kwargs) -> Union[BaseProgress, str]:
-        if val:
+        if val != None:
             self._suffix = str(val)
             self._suffix_kwargs = kwargs
             return self
         return self._suffix
 
     def suffix_kwargs(self, val: Optional[dict] = None) -> Union[BaseProgress, dict]:
-        if val:
+        if val != None:
             self._suffix_kwargs = dict(val)
             return self
         return self._suffix_kwargs
