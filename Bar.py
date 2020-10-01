@@ -114,7 +114,7 @@ class IncrementalBar(Bar):
 
         self._fill_stages: List[str] = [
             ' ', '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█']
-        self.prefix
+        self._fill_character = '█'
 
     def __str__(self):
         filled = self._bar_width * self.progress
