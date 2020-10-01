@@ -136,4 +136,6 @@ class ChargingBar(Bar):
         super().__init__(max_value, current_value, increment_by, cap_value)
 
         self._fill_character = '█'
-        self._empty_character = '*'
+        self._empty_character = '.'
+        self._bar_prefix = ' '
+        self._bar_suffix = ' '
