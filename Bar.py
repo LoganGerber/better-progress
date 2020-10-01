@@ -122,7 +122,7 @@ class IncrementalBar(Bar):
         stage_index = math.floor(math.modf(filled)[0] * len(self._fill_stages))
         empty = self._bar_width - full_filled - 1
 
-        return self._prefix + ' ' + self._bar_prefix + (self._fill * full_filled) + (self._fill_stages[stage_index]) + (self._empty_fill * empty) + self._bar_suffix + ' ' + self._suffix
+        return self._prefix + ' ' + self._bar_prefix + (self._fill_character * full_filled) + (self._fill_stages[stage_index]) + (self._empty_character * empty) + self._bar_suffix + ' ' + self._suffix
 
     def fill_stages(self, stages: Union[List[str], None]) -> Union[None, IncrementalBar]:
         if stages:
