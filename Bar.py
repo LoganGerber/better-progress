@@ -2,7 +2,7 @@ import abc
 import math
 import string
 
-from typing import Union, List
+from typing import Union, List, Optional
 
 import _BaseProgress as base
 
