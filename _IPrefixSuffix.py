@@ -11,7 +11,7 @@ class _EndStringFormatter(string.Formatter):
         return kwargs[key] if key in kwargs else ''
 
 
-class Base(abc.ABC):
+class IPrefixSuffix(abc.ABC):
     _FORMATTER = _EndStringFormatter()
 
     def __init__(self):
@@ -20,27 +20,27 @@ class Base(abc.ABC):
         self._suffix: str = ''
         self._suffix_kwargs: dict = {}
 
-    def prefix(self, val: Optional[str] = None, **kwargs) -> Union[Base, str]:
+    def prefix(self, val: Optional[str] = None, **kwargs) -> Union[IPrefixSuffix, str]:
         if val != None:
             self._prefix = str(val)
             self._prefix_kwargs = kwargs
             return self
         return self._prefix
 
-    def prefix_kwargs(self, val: Optional[dict] = None) -> Union[Base, dict]:
+    def prefix_kwargs(self, val: Optional[dict] = None) -> Union[IPrefixSuffix, dict]:
         if val != None:
             self._prefix_kwargs = dict(val)
             return self
         return self._prefix_kwargs
 
-    def suffix(self, val: Optional[str] = None, **kwargs) -> Union[Base, str]:
+    def suffix(self, val: Optional[str] = None, **kwargs) -> Union[IPrefixSuffix, str]:
         if val != None:
             self._suffix = str(val)
             self._suffix_kwargs = kwargs
             return self
         return self._suffix
 
-    def suffix_kwargs(self, val: Optional[dict] = None) -> Union[Base, dict]:
+    def suffix_kwargs(self, val: Optional[dict] = None) -> Union[IPrefixSuffix, dict]:
         if val != None:
             self._suffix_kwargs = dict(val)
             return self
@@ -55,4 +55,4 @@ class Base(abc.ABC):
         return self._custom_format(self._suffix, self._suffix_kwargs)
 
     def _custom_format(self, text: str, relevant_kwargs: dict = {}) -> str:
-        return Base._FORMATTER.format(text, **relevant_kwargs)
+        return IPrefixSuffix._FORMATTER.format(text, **relevant_kwargs)

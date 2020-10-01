@@ -3,10 +3,10 @@ import string
 
 from typing import Union, Optional
 
-from _Base import Base
+from _IPrefixSuffix import IPrefixSuffix
 
 
-class BaseProgress(Base):
+class BaseProgress(IPrefixSuffix):
     def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):
         self._max_value = max_value
         self._current_value = current_value
