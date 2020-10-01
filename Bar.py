@@ -21,7 +21,9 @@ class Bar(BaseProgress):
         empty = self._bar_width - filled
         prefix = self._format_prefix() if self._prefix != '' else ''
         suffix = self._format_suffix() if self._suffix != '' else ''
-        return prefix + self._bar_prefix + (self._fill_character * filled) + (self._empty_character * empty) + self._bar_suffix + suffix
+        bar_prefix = self._custom_format(self._bar_prefix, {})
+        bar_suffix = self._custom_format(self._bar_suffix, {})
+        return prefix + bar_prefix + (self._fill_character * filled) + (self._empty_character * empty) + bar_suffix + suffix
 
     def bar_width(self, val: Optional[int] = None) -> Union[None, Bar]:
         if val:
