@@ -1,6 +1,6 @@
 import math
 
-from typing import List
+from typing import Tuple, Optional, Union
 
 import _BaseProgress as base
 
