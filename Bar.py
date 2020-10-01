@@ -139,3 +139,19 @@ class ChargingBar(Bar):
         self._empty_character = '.'
         self._bar_prefix = ' '
         self._bar_suffix = ' '
+
+
+class FillingSquaresBar(ChargingBar):
+    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):
+        super().__init__(max_value, current_value, increment_by, cap_value)
+
+        self._empty_character = '▢'
+        self._fill_character = '▣'
+
+
+class FillingCirclesBar(ChargingBar):
+    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):
+        super().__init__(max_value, current_value, increment_by, cap_value)
+
+        self._empty_character = '◯'
+        self._fill_character = '◉'
