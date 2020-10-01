@@ -1,35 +1,20 @@
-import abc
 import sys
 import math
-import string
 
 from typing import Union, List, Optional
 
-import _BaseProgress as base
+from _BaseProgress import BaseProgress
 
 
-class _EndStringFormatter(string.Formatter):
-    def get_value(self, key, args, kwargs):
-        if isinstance(key, int):
-            return super().get_value(key, args, kwargs)
-        return kwargs[key] if key in kwargs else ''
-
-
-class Bar(base.BaseProgress):
-    _FORMATTER = _EndStringFormatter()
-
+class Bar(BaseProgress):
     def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):
-        self._prefix: str = ''
-        self._prefix_kwargs: dict = {}
-        self._suffix: str = ''
-        self._suffix_kwargs: dict = {}
+        super().__init__(max_value, current_value, increment_by)
+
         self._bar_width: int = 32
         self._fill_character: str = '#'
         self._empty_character: str = ' '
         self._bar_prefix: str = '|'
         self._bar_suffix: str = '|'
-
-        super().__init__(max_value, current_value, increment_by)
 
     def __str__(self):
         filled = math.floor(self._bar_width * self.progress)
@@ -37,32 +22,6 @@ class Bar(base.BaseProgress):
         prefix = self._format_prefix() if self._prefix != '' else ''
         suffix = self._format_suffix() if self._suffix != '' else ''
         return prefix + self._bar_prefix + (self._fill_character * filled) + (self._empty_character * empty) + self._bar_suffix + suffix
-
-    def prefix(self, val: Optional[str] = None, **kwargs) -> Union[Bar, str]:
-        if val:
-            self._prefix = str(val)
-            self._prefix_kwargs = kwargs
-            return self
-        return self._prefix
-
-    def prefix_kwargs(self, val: Optional[dict] = None) -> Union[Bar, dict]:
-        if val:
-            self._prefix_kwargs = dict(val)
-            return self
-        return self._prefix_kwargs
-
-    def suffix(self, val: Optional[str] = None, **kwargs) -> Union[Bar, str]:
-        if val:
-            self._suffix = str(val)
-            self._suffix_kwargs = kwargs
-            return self
-        return self._suffix
-
-    def suffix_kwargs(self, val: Optional[dict] = None) -> Union[Bar, dict]:
-        if val:
-            self._suffix_kwargs = dict(val)
-            return self
-        return self._suffix_kwargs
 
     def bar_width(self, val: Optional[int] = None) -> Union[None, Bar]:
         if val:
@@ -93,20 +52,6 @@ class Bar(base.BaseProgress):
             self._bar_suffix = val
             return self
         return self._bar_suffix
-
-    def _format_prefix(self) -> str:
-        return self._format_end(self._prefix, self._prefix_kwargs) + ' '
-
-    def _format_suffix(self) -> str:
-        return ' ' + self._format_end(self._suffix, self._suffix_kwargs)
-
-    def _format_end(self, end, relevant_kwargs: dict) -> str:
-        return Bar._FORMATTER.format(end,
-                                     percent=(str(self.progress * 100) + '%'),
-                                     current_value=self.current_value,
-                                     max_value=self.max_value,
-                                     remaining=self.remaining,
-                                     **relevant_kwargs)
 
 
 class IncrementalBar(Bar):
