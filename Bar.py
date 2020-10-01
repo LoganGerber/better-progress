@@ -37,35 +37,49 @@ class Bar(base.BaseProgress):
         suffix = self._format_suffix() if self._suffix != '' else ''
         return prefix + self._bar_prefix + (self._fill_character * filled) + (self._empty_character * empty) + self._bar_suffix + suffix
 
-    def prefix(self, val: Union[str, None]) -> Union[None, Bar]:
+    def prefix(self, val: Optional[str] = None, **kwargs) -> Union[Bar, str]:
         if val:
-            self._prefix = val if val else ''
+            self._prefix = str(val)
+            self._prefix_kwargs = kwargs
             return self
         return self._prefix
 
-    def suffix(self, val: Union[str, None]) -> Union[None, Bar]:
+    def prefix_kwargs(self, val: Optional[dict] = None) -> Union[Bar, dict]:
         if val:
-            self._suffix = val if val else ''
+            self._prefix_kwargs = dict(val)
+            return self
+        return self._prefix_kwargs
+
+    def suffix(self, val: Optional[str] = None, **kwargs) -> Union[Bar, str]:
+        if val:
+            self._suffix = str(val)
+            self._suffix_kwargs = kwargs
             return self
         return self._suffix
 
-    def bar_width(self, val: Union[int, None]) -> Union[None, Bar]:
+    def suffix_kwargs(self, val: Optional[dict] = None) -> Union[Bar, dict]:
+        if val:
+            self._suffix_kwargs = dict(val)
+            return self
+        return self._suffix_kwargs
+
+    def bar_width(self, val: Optional[int] = None) -> Union[None, Bar]:
         if val:
             self._bar_width = val
             return self
         return self._bar_width
 
-    def fill(self, val: Union[str, None]) -> Union[None, Bar]:
+    def fill_character(self, val: Optional[str]) -> Union[None, Bar]:
         if val:
-            self._fill = val
+            self._fill_character = val
             return self
-        return self._fill
+        return self._fill_character
 
-    def empty_fill(self, val: Union[str, None]) -> Union[None, Bar]:
+    def empty_character(self, val: Union[str, None]) -> Union[None, Bar]:
         if val:
-            self._empty_fill = val
+            self._empty_character = val
             return self
-        return self._empty_fill
+        return self._empty_character
 
     def bar_prefix(self, val: Union[str, None]) -> Union[None, Bar]:
         if val:
