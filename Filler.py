@@ -24,3 +24,10 @@ class Filler(base.BaseProgress):
             max(0, min((len(self._fill_stages) - 1) * self.progress)))
 
         return prefix + self._fill_stages[stage_index] + suffix
+
+    def fill_stages(self, val: Optional[Tuple[str]] = None) -> Union[Filler, Tuple[str]]:
+        if val != None:
+            self._fill_stages = val
+            return self
+        return self._fill_stages
+
