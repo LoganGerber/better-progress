@@ -50,14 +50,16 @@ class BaseProgress(abc.ABC):
         return self._increment_by
 
     def cap_value(self, cap: Optional[bool]) -> Union[BaseProgress, bool]:
-        if cap == self._cap_value:
-            return
+        if cap != None:
+            if cap == self._cap_value:
+                return
 
-        self._cap_value = cap
+            self._cap_value = cap
 
-        # Cap the current value if necessary
-        self.current_value(self.current_value())
-        return self
+            # Cap the current value if necessary
+            self.current_value(self.current_value())
+            return self
+        return self._cap_value
 
     def prefix(self, val: Optional[str] = None, **kwargs) -> Union[BaseProgress, str]:
         if val:
