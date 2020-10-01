@@ -1,7 +1,8 @@
 import abc
 import math
 import string
-import typing
+
+from typing import Union, List
 
 import _BaseProgress as base
 
@@ -36,68 +37,47 @@ class Bar(base.BaseProgress):
         suffix = self._format_suffix() if self._suffix != '' else ''
         return prefix + self._bar_prefix + (self._fill_character * filled) + (self._empty_character * empty) + self._bar_suffix + suffix
 
-    @property
-    def prefix(self) -> str:
+    def prefix(self, val: Union[str, None]) -> Union[None, Bar]:
+        if val:
+            self._prefix = val if val else ''
+            return self
         return self._prefix
 
-    @prefix.setter
-    def prefix(self, val: str) -> None:
-        self._prefix = val if val else ''
-        return self
-
-    @property
-    def suffix(self) -> str:
+    def suffix(self, val: Union[str, None]) -> Union[None, Bar]:
+        if val:
+            self._suffix = val if val else ''
+            return self
         return self._suffix
 
-    @suffix.setter
-    def suffix(self, val: str) -> None:
-        self._suffix = val if val else ''
-        return self
-
-    @property
-    def bar_width(self) -> int:
+    def bar_width(self, val: Union[int, None]) -> Union[None, Bar]:
+        if val:
+            self._bar_width = val
+            return self
         return self._bar_width
 
-    @bar_width.setter
-    def bar_width(self, val: int) -> None:
-        self._bar_width = val
-        return self
-
-    @property
-    def fill(self) -> str:
+    def fill(self, val: Union[str, None]) -> Union[None, Bar]:
+        if val:
+            self._fill = val
+            return self
         return self._fill
 
-    @fill.setter
-    def fill(self, val: str) -> None:
-        self._fill = val
-        return self
-
-    @property
-    def empty_fill(self) -> str:
+    def empty_fill(self, val: Union[str, None]) -> Union[None, Bar]:
+        if val:
+            self._empty_fill = val
+            return self
         return self._empty_fill
 
-    @empty_fill.setter
-    def empty_fill(self, val: str) -> None:
-        self._empty_fill = val
-        return self
-
-    @property
-    def bar_prefix(self) -> str:
+    def bar_prefix(self, val: Union[str, None]) -> Union[None, Bar]:
+        if val:
+            self._bar_prefix = val
+            return self
         return self._bar_prefix
 
-    @bar_prefix.setter
-    def bar_prefix(self, val: str) -> None:
-        self._bar_prefix = val
-        return self
-
-    @property
-    def bar_suffix(self) -> str:
+    def bar_suffix(self, val: Union[str, None]) -> Union[None, Bar]:
+        if val:
+            self._bar_suffix = val
+            return self
         return self._bar_suffix
-
-    @bar_suffix.setter
-    def bar_suffix(self, val: str) -> None:
-        self._bar_suffix = val
-        return self
 
     def _format_prefix(self) -> str:
         return self._format_end(self._prefix, self._prefix_kwargs) + ' '
@@ -115,10 +95,10 @@ class Bar(base.BaseProgress):
 
 
 class IncrementalBar(Bar):
-    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False, prefix: str = '', prefix_kwargs: dict = {}, suffix: str = '', suffix_kwargs: dict = {}, bar_width: int = 32, fill: str = '█', fill_stages: typing.List[str] = [' ', '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'], empty_fill: str = ' ', bar_prefix: str = '|', bar_suffix: str = '|'):
+    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False, prefix: str = '', prefix_kwargs: dict = {}, suffix: str = '', suffix_kwargs: dict = {}, bar_width: int = 32, fill: str = '█', fill_stages: List[str] = [' ', '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'], empty_fill: str = ' ', bar_prefix: str = '|', bar_suffix: str = '|'):
         super().__init__(max_value, current_value, increment_by, cap_value)
 
-        self._fill_stages: typing.List[str] = [
+        self._fill_stages: List[str] = [
             ' ', '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█']
         self.prefix
 
@@ -130,11 +110,8 @@ class IncrementalBar(Bar):
 
         return self._prefix + ' ' + self._bar_prefix + (self._fill * full_filled) + (self._fill_stages[stage_index]) + (self._empty_fill * empty) + self._bar_suffix + ' ' + self._suffix
 
-    @property
-    def fill_stages(self) -> typing.List[str]:
-        return list(self._fill_stages)
-
-    @fill_stages.setter
-    def fill_stages(self, stages: typing.List[str]) -> None:
-        self._fill_stages = stages
-        return self
+    def fill_stages(self, stages: Union[List[str], None]) -> Union[None, IncrementalBar]:
+        if stages:
+            self._fill_stages = stages
+            return self
+        return self._fill_stages
