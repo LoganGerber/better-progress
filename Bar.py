@@ -27,6 +27,7 @@ class Bar(BaseProgress):
             suffix = ' ' + suffix
         bar_prefix = self._custom_format(self._bar_prefix, {})
         bar_suffix = self._custom_format(self._bar_suffix, {})
+
         return prefix + bar_prefix + (self._fill_character * filled) + (self._empty_character * empty) + bar_suffix + suffix
 
     def bar_width(self, val: Optional[int] = None) -> Union[None, Bar]:
