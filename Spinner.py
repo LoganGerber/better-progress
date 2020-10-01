@@ -32,3 +32,31 @@ class Spinner(IPrefixSuffix):
 
     def next(self):
         self._current_stage = (self._current_stage + 1) % len(self._stages)
+
+
+class PieSpinner(Spinner):
+    def __init__(self):
+        super().__init__()
+
+        self._stages = ('◷', '◶', '◵', '◴')
+
+
+class MoonSpinner(Spinner):
+    def __init__(self):
+        super().__init__()
+
+        self._stages = ('◑', '◒', '◐', '◓')
+
+
+class LineSpinner(Spinner):
+    def __init__(self):
+        super().__init__()
+
+        self._stages = ('⎺', '⎻', '⎼', '⎽', '⎼', '⎻')
+
+
+class PixelSpinner(Spinner):
+    def __init__(self):
+        super().__init__()
+
+        self._stages = ('⣾', '⣷', '⣯', '⣟', '⡿', '⢿', '⣻', '⣽')
