@@ -1,8 +1,11 @@
 from __future__ import annotations
 
-from typing import Tuple, Optional, Union
+from typing import Tuple, TypeVar
 
 from _IPrefixSuffix import IPrefixSuffix
+
+
+S = TypeVar('S', bound='Spinner')
 
 
 class Spinner(IPrefixSuffix):
@@ -13,26 +16,28 @@ class Spinner(IPrefixSuffix):
         self._current_stage: int = 0
 
     def __str__(self):
-        prefix = self.formatted_prefix
+        prefix = self.formatted_prefix()
         if prefix != '':
             prefix = prefix + ' '
-        suffix = self.formatted_suffix
+        suffix = self.formatted_suffix()
         if suffix != '':
             suffix = ' ' + suffix
 
         return prefix + self._stages[self._current_stage] + suffix
 
-    def stages(self, val: Optional[Tuple[str]] = None) -> Union[Tuple[str], Spinner]:
-        if val != None:
-            self._stages = val
-            return self
+    def get_stages(self) -> Tuple[str]:
         return self._stages
 
-    def current_stage(self, val: Optional[int] = None) -> Union[int, Spinner]:
-        if val != None:
-            self._current_stage = val
-            return self
+    def set_stages(self: S, val: Tuple[str]) -> S:
+        self._stages = val
+        return self
+
+    def get_current_stage(self) -> int:
         return self._current_stage
+
+    def set_current_stage(self: S, val: int) -> S:
+        self._current_stage = val
+        return self
 
     def next(self):
         self._current_stage = (self._current_stage + 1) % len(self._stages)

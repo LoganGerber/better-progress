@@ -3,7 +3,7 @@ from __future__ import annotations
 import abc
 import string
 
-from typing import Union, Optional
+from typing import TypeVar
 
 
 class _EndStringFormatter(string.Formatter):
@@ -13,46 +13,53 @@ class _EndStringFormatter(string.Formatter):
         return kwargs[key] if key in kwargs else ''
 
 
+S = TypeVar('S', bound='IPrefixSuffix')
+
+
 class IPrefixSuffix(abc.ABC):
     _FORMATTER = _EndStringFormatter()
 
-    def __init__(self):
+    def __init__(self: S):
         self._prefix: str = ''
         self._prefix_kwargs: dict = {}
         self._suffix: str = ''
         self._suffix_kwargs: dict = {}
 
-    def prefix(self, val: Optional[str] = None, **kwargs) -> Union[IPrefixSuffix, str]:
-        if val != None:
-            self._prefix = str(val)
-            self._prefix_kwargs = kwargs
-            return self
+    def get_prefix(self) -> str:
         return self._prefix
 
-    def prefix_kwargs(self, val: Optional[dict] = None) -> Union[IPrefixSuffix, dict]:
-        if val != None:
-            self._prefix_kwargs = dict(val)
-            return self
+    def set_prefix(self: S, val: str, **kwargs) -> S:
+        self._prefix = val
+        if len(kwargs) > 0:
+            self._prefix_kwargs = kwargs
+        return self
+
+    def get_prefix_kwargs(self) -> dict:
         return self._prefix_kwargs
 
-    def suffix(self, val: Optional[str] = None, **kwargs) -> Union[IPrefixSuffix, str]:
-        if val != None:
-            self._suffix = str(val)
-            self._suffix_kwargs = kwargs
-            return self
+    def set_prefix_kwargs(self: S, val: dict) -> S:
+        self._prefix_kwargs = val
+        return self
+
+    def get_suffix(self) -> str:
         return self._suffix
 
-    def suffix_kwargs(self, val: Optional[dict] = None) -> Union[IPrefixSuffix, dict]:
-        if val != None:
-            self._suffix_kwargs = dict(val)
-            return self
+    def set_suffix(self: S, val: str, **kwargs) -> S:
+        self._suffix = val
+        if len(kwargs) > 0:
+            self._suffix_kwargs = kwargs
+        return self
+
+    def get_suffix_kwargs(self) -> dict:
         return self._suffix_kwargs
 
-    @property
+    def set_suffix_kwargs(self: S, val: dict) -> S:
+        self._suffix_kwargs = val
+        return self
+
     def formatted_prefix(self) -> str:
         return self._custom_format(self._prefix, self._prefix_kwargs)
 
-    @property
     def formatted_suffix(self) -> str:
         return self._custom_format(self._suffix, self._suffix_kwargs)
 

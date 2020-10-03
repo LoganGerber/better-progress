@@ -3,9 +3,12 @@ from __future__ import annotations
 import sys
 import math
 
-from typing import Union, List, Optional
+from typing import TypeVar, List
 
 from _BaseProgress import BaseProgress
+
+
+B = TypeVar('B', bound='Bar')
 
 
 class Bar(BaseProgress):
@@ -21,68 +24,76 @@ class Bar(BaseProgress):
         self._bar_suffix_kwargs: dict = {}
 
     def __str__(self):
-        filled = math.floor(self._bar_width * self.percent)
+        filled = math.floor(self._bar_width * self.percent())
         empty = self._bar_width - filled
-        prefix = self.formatted_prefix
+        prefix = self.formatted_prefix()
         if prefix != '':
             prefix = prefix + ' '
-        suffix = self.formatted_suffix
+        suffix = self.formatted_suffix()
         if suffix != '':
             suffix = ' ' + suffix
-        bar_prefix = self.formatted_bar_prefix
-        bar_suffix = self.formatted_bar_suffix
+        bar_prefix = self.formatted_bar_prefix()
+        bar_suffix = self.formatted_bar_suffix()
 
         return prefix + bar_prefix + (self._fill_character * filled) + (self._empty_character * empty) + bar_suffix + suffix
 
-    def bar_width(self, val: Optional[int] = None) -> Union[int, Bar]:
-        if val != None:
-            self._bar_width = val
-            return self
+    def get_bar_width(self) -> int:
         return self._bar_width
 
-    def fill_character(self, val: Optional[str]) -> Union[str, Bar]:
-        if val != None:
-            self._fill_character = val
-            return self
+    def set_bar_width(self: B, val: int) -> B:
+        self._bar_width = val
+        return self
+
+    def get_fill_character(self) -> str:
         return self._fill_character
 
-    def empty_character(self, val: Optional[str]) -> Union[str, Bar]:
-        if val != None:
-            self._empty_character = val
-            return self
+    def set_fill_character(self: B, val: str) -> B:
+        self._fill_character = val
+        return self
+
+    def get_empty_character(self) -> str:
         return self._empty_character
 
-    def bar_prefix(self, val: Optional[str]) -> Union[str, Bar]:
-        if val != None:
-            self._bar_prefix = val
-            return self
+    def set_empty_character(self: B, val: str) -> B:
+        self._empty_character = val
+        return self
+
+    def get_bar_prefix(self) -> str:
         return self._bar_prefix
 
-    def bar_prefix_kwargs(self, val: Optional[dict]) -> Union[dict, Bar]:
-        if val != None:
-            self._bar_prefix_kwargs = val
-            return self
+    def set_bar_prefix(self: B, val: str) -> B:
+        self._bar_prefix = val
+        return self
+
+    def get_bar_prefix_kwargs(self) -> dict:
         return self._bar_prefix_kwargs
 
-    def bar_suffix(self, val: Optional[str]) -> Union[str, Bar]:
-        if val != None:
-            self._bar_suffix = val
-            return self
+    def set_bar_prefix_kwargs(self: B, val: dict) -> B:
+        self._bar_prefix_kwargs = val
+        return self
+
+    def get_bar_suffix(self) -> str:
         return self._bar_suffix
 
-    def bar_suffix_kwargs(self, val: Optional[dict]) -> Union[dict, Bar]:
-        if val != None:
-            self._bar_suffix_kwargs = val
-            return self
+    def set_bar_suffix(self: B, val: str) -> B:
+        self._bar_suffix = val
+        return self
+
+    def get_bar_suffix_kwargs(self) -> dict:
         return self._bar_suffix_kwargs
 
-    @property
+    def set_bar_suffix_kwargs(self: B, val: dict) -> B:
+        self._bar_suffix_kwargs = val
+        return self
+
     def formatted_bar_prefix(self) -> str:
         return self._custom_format(self._bar_prefix, self._bar_prefix_kwargs)
 
-    @property
     def formatted_bar_suffix(self) -> str:
         return self._custom_format(self._bar_suffix, self._bar_suffix_kwargs)
+
+
+I = TypeVar('I', bound='IncrementalBar')
 
 
 class IncrementalBar(Bar):
@@ -98,29 +109,30 @@ class IncrementalBar(Bar):
         self._fill_character = '█'
 
     def __str__(self):
-        filled = self._bar_width * self.percent
+        filled = self._bar_width * self.percent()
         has_partial = math.modf(filled)[0] != 0
         full_filled = math.floor(filled)
         stage_index = math.floor(math.modf(filled)[0] * len(self._fill_stages))
         empty = self._bar_width - full_filled - (1 if has_partial else 0)
 
-        bar_prefix = self.formatted_bar_prefix
-        bar_suffix = self.formatted_bar_suffix
+        bar_prefix = self.formatted_bar_prefix()
+        bar_suffix = self.formatted_bar_suffix()
 
-        prefix = self.formatted_prefix
+        prefix = self.formatted_prefix()
         if prefix != '':
             prefix = prefix + ' '
-        suffix = self.formatted_suffix
+        suffix = self.formatted_suffix()
         if suffix != '':
             suffix = ' ' + suffix
 
         return prefix + bar_prefix + (self._fill_character * full_filled) + (self._fill_stages[stage_index] if has_partial else '') + (self._empty_character * empty) + bar_suffix + suffix
 
-    def fill_stages(self, stages: Optional[List[str]]) -> Union[List[str], IncrementalBar]:
-        if stages != None:
-            self._fill_stages = stages
-            return self
+    def get_fill_stages(self) -> List[str]:
         return self._fill_stages
+
+    def set_fill_stages(self: I, stages: List[str]) -> I:
+        self._fill_stages = stages
+        return self
 
 
 class RaisingIncrementalBar(IncrementalBar):
