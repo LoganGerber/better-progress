@@ -48,7 +48,7 @@ class IPrefixSuffix(abc.ABC):
 
     @property
     def formatted_prefix(self) -> str:
-        return self._custom_format(self._suffix, self._suffix_kwargs)
+        return self._custom_format(self._prefix, self._prefix_kwargs)
 
     @property
     def formatted_suffix(self) -> str:
