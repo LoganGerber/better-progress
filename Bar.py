@@ -16,7 +16,9 @@ class Bar(BaseProgress):
         self._fill_character: str = '#'
         self._empty_character: str = ' '
         self._bar_prefix: str = '|'
+        self._bar_prefix_kwargs: dict = {}
         self._bar_suffix: str = '|'
+        self._bar_suffix_kwargs: dict = {}
 
     def __str__(self):
         filled = math.floor(self._bar_width * self.percent)
@@ -56,11 +58,23 @@ class Bar(BaseProgress):
             return self
         return self._bar_prefix
 
+    def bar_prefix_kwargs(self, val: Optional[dict]) -> Union[dict, Bar]:
+        if val != None:
+            self._bar_prefix_kwargs = val
+            return self
+        return self._bar_prefix_kwargs
+
     def bar_suffix(self, val: Optional[str]) -> Union[str, Bar]:
         if val != None:
             self._bar_suffix = val
             return self
         return self._bar_suffix
+
+    def bar_suffix_kwargs(self, val: Optional[dict]) -> Union[dict, Bar]:
+        if val != None:
+            self._bar_suffix_kwargs = val
+            return self
+        return self._bar_suffix_kwargs
 
 
 class IncrementalBar(Bar):
