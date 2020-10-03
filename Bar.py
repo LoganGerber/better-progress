@@ -29,8 +29,8 @@ class Bar(BaseProgress):
         suffix = self.formatted_suffix
         if suffix != '':
             suffix = ' ' + suffix
-        bar_prefix = self._custom_format(self._bar_prefix, {})
-        bar_suffix = self._custom_format(self._bar_suffix, {})
+        bar_prefix = self.formatted_bar_prefix
+        bar_suffix = self.formatted_bar_suffix
 
         return prefix + bar_prefix + (self._fill_character * filled) + (self._empty_character * empty) + bar_suffix + suffix
 
@@ -76,6 +76,14 @@ class Bar(BaseProgress):
             return self
         return self._bar_suffix_kwargs
 
+    @property
+    def formatted_bar_prefix(self) -> str:
+        return self._custom_format(self._bar_prefix, self._bar_prefix_kwargs)
+
+    @property
+    def formatted_bar_suffix(self) -> str:
+        return self._custom_format(self._bar_suffix, self._bar_suffix_kwargs)
+
 
 class IncrementalBar(Bar):
     def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):
@@ -96,8 +104,8 @@ class IncrementalBar(Bar):
         stage_index = math.floor(math.modf(filled)[0] * len(self._fill_stages))
         empty = self._bar_width - full_filled - (1 if has_partial else 0)
 
-        bar_prefix = self._custom_format(self._bar_prefix, {})
-        bar_suffix = self._custom_format(self._bar_suffix, {})
+        bar_prefix = self.formatted_bar_prefix
+        bar_suffix = self.formatted_bar_suffix
 
         prefix = self.formatted_prefix
         if prefix != '':
