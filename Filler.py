@@ -23,7 +23,7 @@ class Filler(base.BaseProgress):
             suffix = ' ' + suffix
 
         stage_index = math.floor(
-            max(0, min((len(self._fill_stages) - 1) * self.progress)))
+            max(0, min((len(self._fill_stages) - 1) * self.percent)))
 
         return prefix + self._fill_stages[stage_index] + suffix
 

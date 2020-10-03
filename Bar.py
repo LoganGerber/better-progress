@@ -19,7 +19,7 @@ class Bar(BaseProgress):
         self._bar_suffix: str = '|'
 
     def __str__(self):
-        filled = math.floor(self._bar_width * self.progress)
+        filled = math.floor(self._bar_width * self.percent)
         empty = self._bar_width - filled
         prefix = self.formatted_prefix
         if prefix != '':
@@ -76,7 +76,7 @@ class IncrementalBar(Bar):
         self._fill_character = '█'
 
     def __str__(self):
-        filled = self._bar_width * self.progress
+        filled = self._bar_width * self.percent
         full_filled = math.floor(filled)
         stage_index = math.floor(math.modf(filled)[0] * len(self._fill_stages))
         empty = self._bar_width - full_filled - 1

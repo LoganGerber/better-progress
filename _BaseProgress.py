@@ -57,7 +57,7 @@ class BaseProgress(IPrefixSuffix):
         return self._cap_value
 
     @property
-    def progress(self) -> float:
+    def percent(self) -> float:
         return self._current_value / self._max_value
 
     @property
@@ -72,9 +72,7 @@ class BaseProgress(IPrefixSuffix):
     def _custom_format(self, text: str, relevant_kwargs: dict = {}) -> str:
         kwargs = {
             **relevant_kwargs,
-            'percent': str(self.progress * 100) + '%',
-            'current_value': self.current_value,
-            'max_value': self.max_value,
+            'percent': self.percent * 100,
             'remaining': self.remaining
         }
         return super()._custom_format(text, kwargs)
