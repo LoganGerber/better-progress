@@ -64,6 +64,10 @@ class BaseProgress(IPrefixSuffix):
     def remaining(self) -> float:
         return self._max_value - self._current_value
 
+    @property
+    def complete(self) -> bool:
+        return self._current_value >= self._max_value
+
     def next(self):
         self._current_value += self._increment_by
         if self._cap_value and self._current_value > self._max_value:
