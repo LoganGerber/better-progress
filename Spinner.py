@@ -9,7 +9,7 @@ class Spinner(IPrefixSuffix):
     def __init__(self):
         super().__init__()
 
-        self._stages: Tuple[str] = ('-', '\\', ' | ', ' / ')
+        self._stages: Tuple[str] = ('-', '\\', '|', '/')
         self._current_stage: int = 0
 
     def __str__(self):
