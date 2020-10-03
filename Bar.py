@@ -114,7 +114,7 @@ class PixelBar(IncrementalBar):
     def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):
         super().__init__(max_value, current_value, increment_by, cap_value)
 
-        self._fill_stages = ['⡀', '⡄', '⡆', '⡇', '⣇', '⣧', '⣷']
+        self._fill_stages = [' ', '⡀', '⡄', '⡆', '⡇', '⣇', '⣧', '⣷']
         self._fill_character = '⣿'
 
 
