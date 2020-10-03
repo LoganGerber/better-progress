@@ -10,14 +10,12 @@ from _IPrefixSuffix import IPrefixSuffix
 
 class BaseProgress(IPrefixSuffix):
     def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):
+        super().__init__()
+
         self._max_value = max_value
         self._current_value = current_value
         self._increment_by = increment_by
         self._cap_value = cap_value
-        self._prefix: str = ''
-        self._prefix_kwargs: dict = {}
-        self._suffix: str = ''
-        self._suffix_kwargs: dict = {}
 
     @abc.abstractmethod
     def __str__(self):
