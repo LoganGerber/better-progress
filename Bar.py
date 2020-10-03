@@ -32,31 +32,31 @@ class Bar(BaseProgress):
 
         return prefix + bar_prefix + (self._fill_character * filled) + (self._empty_character * empty) + bar_suffix + suffix
 
-    def bar_width(self, val: Optional[int] = None) -> Union[None, Bar]:
+    def bar_width(self, val: Optional[int] = None) -> Union[int, Bar]:
         if val != None:
             self._bar_width = val
             return self
         return self._bar_width
 
-    def fill_character(self, val: Optional[str]) -> Union[None, Bar]:
+    def fill_character(self, val: Optional[str]) -> Union[str, Bar]:
         if val != None:
             self._fill_character = val
             return self
         return self._fill_character
 
-    def empty_character(self, val: Union[str, None]) -> Union[None, Bar]:
+    def empty_character(self, val: Optional[str]) -> Union[str, Bar]:
         if val != None:
             self._empty_character = val
             return self
         return self._empty_character
 
-    def bar_prefix(self, val: Union[str, None]) -> Union[None, Bar]:
+    def bar_prefix(self, val: Optional[str]) -> Union[str, Bar]:
         if val != None:
             self._bar_prefix = val
             return self
         return self._bar_prefix
 
-    def bar_suffix(self, val: Union[str, None]) -> Union[None, Bar]:
+    def bar_suffix(self, val: Optional[str]) -> Union[str, Bar]:
         if val != None:
             self._bar_suffix = val
             return self
@@ -94,7 +94,7 @@ class IncrementalBar(Bar):
 
         return prefix + bar_prefix + (self._fill_character * full_filled) + (self._fill_stages[stage_index] if has_partial else '') + (self._empty_character * empty) + bar_suffix + suffix
 
-    def fill_stages(self, stages: Union[List[str], None]) -> Union[None, IncrementalBar]:
+    def fill_stages(self, stages: Optional[List[str]]) -> Union[List[str], IncrementalBar]:
         if stages != None:
             self._fill_stages = stages
             return self
