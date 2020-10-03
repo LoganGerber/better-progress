@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Tuple, Optional, Union
 
 from _IPrefixSuffix import IPrefixSuffix
