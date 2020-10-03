@@ -77,6 +77,8 @@ class BaseProgress(IPrefixSuffix):
         kwargs = {
             **relevant_kwargs,
             'percent': self.percent * 100,
+            'current_value': self.current_value(),
+            'max_value': self.max_value(),
             'remaining': self.remaining
         }
         return super()._custom_format(text, kwargs)
