@@ -7,6 +7,8 @@ from _IPrefixSuffix import IPrefixSuffix
 
 class Spinner(IPrefixSuffix):
     def __init__(self):
+        super().__init__()
+
         self._stages: Tuple[str] = ('-', '\\', ' | ', ' / ')
         self._current_stage: int = 0
 
