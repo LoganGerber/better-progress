@@ -9,7 +9,7 @@ from _IPrefixSuffix import IPrefixSuffix
 
 
 class BaseProgress(IPrefixSuffix):
-    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):
+    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = True):
         super().__init__()
 
         self._max_value = max_value

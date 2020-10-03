@@ -9,7 +9,7 @@ from _BaseProgress import BaseProgress
 
 
 class Bar(BaseProgress):
-    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):
+    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = True):
         super().__init__(max_value, current_value, increment_by)
 
         self._bar_width: int = 32
@@ -86,7 +86,7 @@ class Bar(BaseProgress):
 
 
 class IncrementalBar(Bar):
-    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):
+    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = True):
         super().__init__(max_value, current_value, increment_by, cap_value)
 
         if sys.platform.startswith('win'):
@@ -124,7 +124,7 @@ class IncrementalBar(Bar):
 
 
 class RaisingIncrementalBar(IncrementalBar):
-    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):
+    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = True):
         super().__init__(max_value, current_value, increment_by, cap_value)
 
         self._fill_stages = [
@@ -133,7 +133,7 @@ class RaisingIncrementalBar(IncrementalBar):
 
 
 class PixelBar(IncrementalBar):
-    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):
+    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = True):
         super().__init__(max_value, current_value, increment_by, cap_value)
 
         self._fill_stages = [' ', '⡀', '⡄', '⡆', '⡇', '⣇', '⣧', '⣷']
@@ -141,7 +141,7 @@ class PixelBar(IncrementalBar):
 
 
 class ShadyBar(IncrementalBar):
-    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):
+    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = True):
         super().__init__(max_value, current_value, increment_by, cap_value)
 
         self._fill_stages = [' ', '░', '▒', '▓']
@@ -149,7 +149,7 @@ class ShadyBar(IncrementalBar):
 
 
 class ChargingBar(Bar):
-    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):
+    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = True):
         super().__init__(max_value, current_value, increment_by, cap_value)
 
         self._fill_character = '█'
@@ -159,7 +159,7 @@ class ChargingBar(Bar):
 
 
 class FillingSquaresBar(ChargingBar):
-    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):
+    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = True):
         super().__init__(max_value, current_value, increment_by, cap_value)
 
         self._empty_character = '▢'
@@ -167,7 +167,7 @@ class FillingSquaresBar(ChargingBar):
 
 
 class FillingCirclesBar(ChargingBar):
-    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = False):
+    def __init__(self, max_value: float = 100, current_value: float = 0, increment_by: float = 1, cap_value: bool = True):
         super().__init__(max_value, current_value, increment_by, cap_value)
 
         self._empty_character = '◯'
