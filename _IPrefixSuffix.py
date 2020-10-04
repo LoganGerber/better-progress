@@ -9,8 +9,11 @@ from typing import TypeVar
 class _EndStringFormatter(string.Formatter):
     def get_value(self, key, args, kwargs):
         if isinstance(key, int):
-            return super().get_value(key, args, kwargs)
-        return kwargs[key] if key in kwargs else ''
+            if len(args) > key:
+                return args[key]
+            else:
+                return '{{}}'
+        return kwargs[key] if key in kwargs else '{{{}}}'.format(key)
 
 
 S = TypeVar('S', bound='IPrefixSuffix')
