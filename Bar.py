@@ -19,9 +19,9 @@ class Bar(BaseProgress):
         self._fill_character: str = '#'
         self._empty_character: str = ' '
         self._bar_prefix: str = '|'
-        self._bar_prefix_kwargs: dict = {}
+        self._bar_prefix_replacement_fields: dict = {}
         self._bar_suffix: str = '|'
-        self._bar_suffix_kwargs: dict = {}
+        self._bar_suffix_replacement_fields: dict = {}
 
     def __str__(self):
         filled = math.floor(self._bar_width * self.percent())
@@ -65,11 +65,11 @@ class Bar(BaseProgress):
         self._bar_prefix = val
         return self
 
-    def get_bar_prefix_kwargs(self) -> dict:
-        return self._bar_prefix_kwargs
+    def get_bar_prefix_replacement_fields(self) -> dict:
+        return self._bar_prefix_replacement_fields
 
-    def set_bar_prefix_kwargs(self: B, val: dict) -> B:
-        self._bar_prefix_kwargs = val
+    def set_bar_prefix_replacement_fields(self: B, val: dict) -> B:
+        self._bar_prefix_replacement_fields = val
         return self
 
     def get_bar_suffix(self) -> str:
@@ -79,18 +79,18 @@ class Bar(BaseProgress):
         self._bar_suffix = val
         return self
 
-    def get_bar_suffix_kwargs(self) -> dict:
-        return self._bar_suffix_kwargs
+    def get_bar_suffix_replacement_fields(self) -> dict:
+        return self._bar_suffix_replacement_fields
 
-    def set_bar_suffix_kwargs(self: B, val: dict) -> B:
-        self._bar_suffix_kwargs = val
+    def set_bar_suffix_replacement_fields(self: B, val: dict) -> B:
+        self._bar_suffix_replacement_fields = val
         return self
 
     def formatted_bar_prefix(self) -> str:
-        return self._custom_format(self._bar_prefix, self._bar_prefix_kwargs)
+        return self._custom_format(self._bar_prefix, self._bar_prefix_replacement_fields)
 
     def formatted_bar_suffix(self) -> str:
-        return self._custom_format(self._bar_suffix, self._bar_suffix_kwargs)
+        return self._custom_format(self._bar_suffix, self._bar_suffix_replacement_fields)
 
 
 I = TypeVar('I', bound='IncrementalBar')
