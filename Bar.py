@@ -166,8 +166,8 @@ class ChargingBar(Bar):
 
         self._fill_character = '█'
         self._empty_character = '.'
-        self._bar_prefix = ' '
-        self._bar_suffix = ' '
+        self._bar_prefix = ''
+        self._bar_suffix = ''
 
 
 class FillingSquaresBar(ChargingBar):
