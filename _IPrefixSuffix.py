@@ -18,7 +18,7 @@ class _EndStringFormatter(string.Formatter):
         return kwargs[key] if key in kwargs else '{{{}}}'.format(key)
 
 
-S = TypeVar('S', bound='IPrefixSuffix')
+_S = TypeVar('S', bound='IPrefixSuffix')
 
 
 class IPrefixSuffix(abc.ABC):
@@ -62,7 +62,7 @@ class IPrefixSuffix(abc.ABC):
     """
     _FORMATTER = _EndStringFormatter()
 
-    def __init__(self: S):
+    def __init__(self):
         self._prefix: str = ''
         self._prefix_replacement_fields: dict = {}
         self._suffix: str = ''
@@ -72,7 +72,7 @@ class IPrefixSuffix(abc.ABC):
         """ Get the prefix without formatting."""
         return self._prefix
 
-    def set_prefix(self: S, val: str, **kwargs) -> S:
+    def set_prefix(self: _S, val: str, **kwargs) -> _S:
         """ Set the prefix while optionally specifying any replacement fields.
 
         Keyword arguments:
@@ -89,7 +89,7 @@ class IPrefixSuffix(abc.ABC):
         """ Get the replacement field values for the prefix."""
         return self._prefix_replacement_fields
 
-    def set_prefix_replacement_fields(self: S, val: dict) -> S:
+    def set_prefix_replacement_fields(self: _S, val: dict) -> _S:
         """ Set the replacement field values for the prefix.
 
         Keyword arguments:
@@ -102,7 +102,7 @@ class IPrefixSuffix(abc.ABC):
         """ Get the suffix without any formatting."""
         return self._suffix
 
-    def set_suffix(self: S, val: str, **kwargs) -> S:
+    def set_suffix(self: _S, val: str, **kwargs) -> _S:
         """ Set the suffix while optionally specifying any replacement fields.
 
         Keyword arugments:
@@ -119,7 +119,7 @@ class IPrefixSuffix(abc.ABC):
         """ Get the replacement field values for the suffix."""
         return self._suffix_replacement_fields
 
-    def set_suffix_replacement_fields(self: S, val: dict) -> S:
+    def set_suffix_replacement_fields(self: _S, val: dict) -> _S:
         """ Set the replacement field values for the prefix.
 
         Keyword arguments:
