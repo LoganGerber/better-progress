@@ -8,7 +8,7 @@ from typing import TypeVar, List
 from _BaseProgress import BaseProgress
 
 
-B = TypeVar('B', bound='Bar')
+_B = TypeVar('B', bound='Bar')
 
 
 class Bar(BaseProgress):
@@ -40,49 +40,49 @@ class Bar(BaseProgress):
     def get_bar_width(self) -> int:
         return self._bar_width
 
-    def set_bar_width(self: B, val: int) -> B:
+    def set_bar_width(self: _B, val: int) -> _B:
         self._bar_width = val
         return self
 
     def get_fill_character(self) -> str:
         return self._fill_character
 
-    def set_fill_character(self: B, val: str) -> B:
+    def set_fill_character(self: _B, val: str) -> _B:
         self._fill_character = val
         return self
 
     def get_empty_character(self) -> str:
         return self._empty_character
 
-    def set_empty_character(self: B, val: str) -> B:
+    def set_empty_character(self: _B, val: str) -> _B:
         self._empty_character = val
         return self
 
     def get_bar_prefix(self) -> str:
         return self._bar_prefix
 
-    def set_bar_prefix(self: B, val: str) -> B:
+    def set_bar_prefix(self: _B, val: str) -> _B:
         self._bar_prefix = val
         return self
 
     def get_bar_prefix_replacement_fields(self) -> dict:
         return self._bar_prefix_replacement_fields
 
-    def set_bar_prefix_replacement_fields(self: B, val: dict) -> B:
+    def set_bar_prefix_replacement_fields(self: _B, val: dict) -> _B:
         self._bar_prefix_replacement_fields = val
         return self
 
     def get_bar_suffix(self) -> str:
         return self._bar_suffix
 
-    def set_bar_suffix(self: B, val: str) -> B:
+    def set_bar_suffix(self: _B, val: str) -> _B:
         self._bar_suffix = val
         return self
 
     def get_bar_suffix_replacement_fields(self) -> dict:
         return self._bar_suffix_replacement_fields
 
-    def set_bar_suffix_replacement_fields(self: B, val: dict) -> B:
+    def set_bar_suffix_replacement_fields(self: _B, val: dict) -> _B:
         self._bar_suffix_replacement_fields = val
         return self
 
@@ -93,7 +93,7 @@ class Bar(BaseProgress):
         return self._custom_format(self._bar_suffix, self._bar_suffix_replacement_fields)
 
 
-I = TypeVar('I', bound='IncrementalBar')
+_I = TypeVar('I', bound='IncrementalBar')
 
 
 class IncrementalBar(Bar):
@@ -130,7 +130,7 @@ class IncrementalBar(Bar):
     def get_fill_stages(self) -> List[str]:
         return self._fill_stages
 
-    def set_fill_stages(self: I, stages: List[str]) -> I:
+    def set_fill_stages(self: _I, stages: List[str]) -> _I:
         self._fill_stages = stages
         return self
 
