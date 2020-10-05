@@ -5,7 +5,7 @@ from typing import Tuple, TypeVar
 from _IPrefixSuffix import IPrefixSuffix
 
 
-S = TypeVar('S', bound='Spinner')
+_S = TypeVar('S', bound='Spinner')
 
 
 class Spinner(IPrefixSuffix):
@@ -28,14 +28,14 @@ class Spinner(IPrefixSuffix):
     def get_stages(self) -> Tuple[str]:
         return self._stages
 
-    def set_stages(self: S, val: Tuple[str]) -> S:
+    def set_stages(self: _S, val: Tuple[str]) -> _S:
         self._stages = val
         return self
 
     def get_current_stage(self) -> int:
         return self._current_stage
 
-    def set_current_stage(self: S, val: int) -> S:
+    def set_current_stage(self: _S, val: int) -> _S:
         self._current_stage = val
         return self
 

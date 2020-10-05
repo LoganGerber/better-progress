@@ -7,7 +7,7 @@ from typing import Tuple, TypeVar
 import _BaseProgress as base
 
 
-S = TypeVar('S', bound='Filler')
+_S = TypeVar('S', bound='Filler')
 
 
 class Filler(base.BaseProgress):
@@ -33,7 +33,7 @@ class Filler(base.BaseProgress):
     def get_fill_stages(self) -> Tuple[str]:
         return self._fill_stages
 
-    def set_fill_stages(self: S, val: Tuple[str]) -> S:
+    def set_fill_stages(self: _S, val: Tuple[str]) -> _S:
         self._fill_stages = val
         return self
 
