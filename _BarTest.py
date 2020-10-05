@@ -34,10 +34,15 @@ g = Bar.FillingSquaresBar(25, 0).set_prefix(prefix).set_suffix(suffix)
 h = Bar.FillingCirclesBar(25, 0).set_prefix(prefix).set_suffix(suffix)
 
 j = Bar.Bar(25, 0).set_bar_prefix('{bigdumb}').set_bar_suffix(
-    '!!!').set_bar_prefix_kwargs({'bigdumb': 'LETS G'}).set_fill_character('O')
+    '!!!').set_bar_prefix_replacement_fields({'bigdumb': 'LETS G'}).set_fill_character('O')
+
+k = Bar.ShadyBar(100, 0).set_bar_width(
+    10).set_prefix(prefix).set_suffix(suffix)
+
+Bar.Bar()
 
 
-arr = [a, b, c, d, e, f, g, h, j]
+arr = [a, b, c, d, e, f, g, h, j, k]
 
 for i in range(len(arr)):
     thing = arr[i]
