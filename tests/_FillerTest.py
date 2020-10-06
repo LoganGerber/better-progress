@@ -18,12 +18,12 @@ arr = [a, b, c]
 for i in range(len(arr)):
     thing = arr[i]
     print('printing {}:'.format(i))
-    print(thing, end='\r')
+    print(thing, end='')
     while not thing.complete():
-        text = (' ' * os.get_terminal_size()[0]) + '\r'
+        text = '\r' + (' ' * os.get_terminal_size()[0]) + '\r'
         time.sleep(0.2)
         thing.next()
         text += str(thing)
-        print(text, end='\r')
+        print(text, end='')
 
     print()
