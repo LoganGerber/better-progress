@@ -1,6 +1,38 @@
-A progress bar that actually doesn't make assumptions
+# Better-Progress
+
+A progress bar that actually doesn't make assumptions.
 
 This package is heavily inspired by the [progress](https://github.com/verigak/progress/) package. However, unlike progress, this package handles progress bars in a sane and user-friendly way.
+
+## Basic usage
+### Progress bars
+``` py
+from better_progress import Bar
+
+progress_bar = Bar.Bar(max_value)
+print(progress_bar)
+```
+
+### Fillers
+``` py
+from better_progress import Filler
+
+filler = Filler.Filler(max_value)
+print(filler)
+```
+
+### Spinners
+``` py
+from better_progress import Spinner
+
+#...
+
+spinner = Spinner.Spinner()
+while working:
+    #...
+    spinner.next()
+    print(spinner)
+```
 
 ## Comparisons between progress and better-progress
 * Viewing the progress bar
