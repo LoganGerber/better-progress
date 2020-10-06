@@ -1,7 +1,7 @@
 import os
 import time
 
-import Spinner
+import better_progress.Spinner as Spinner
 
 a = Spinner.Spinner()
 

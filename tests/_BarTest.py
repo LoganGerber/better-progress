@@ -1,7 +1,7 @@
 import os
 import time
 
-import Bar
+import better_progress.Bar as Bar
 
 prefix = '{remaining:02d} remaining'
 suffix = '{current_value}/{max_value} ({percent:.2f}%)'

@@ -5,7 +5,7 @@ import string
 
 from typing import TypeVar
 
-from _IPrefixSuffix import IPrefixSuffix
+from ._IPrefixSuffix import IPrefixSuffix
 
 
 _S = TypeVar('S', bound='BaseProgress')

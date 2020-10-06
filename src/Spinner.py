@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from typing import Tuple, TypeVar
 
-from _IPrefixSuffix import IPrefixSuffix
+from ._IPrefixSuffix import IPrefixSuffix
 
 
 _S = TypeVar('S', bound='Spinner')

@@ -1,7 +1,7 @@
 import os
 import time
 
-import Filler
+import better_progress.Filler as Filler
 
 prefix = '{remaining:02d} remaining'
 suffix = '{current_value}/{max_value} ({percent:.2f}%)'

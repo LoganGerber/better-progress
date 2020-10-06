@@ -19,7 +19,7 @@ import math
 
 from typing import TypeVar, List
 
-from _BaseProgress import BaseProgress
+from ._BaseProgress import BaseProgress
 
 
 _B = TypeVar('B', bound='Bar')

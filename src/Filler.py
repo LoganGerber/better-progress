@@ -7,13 +7,13 @@ import math
 
 from typing import Tuple, TypeVar
 
-import _BaseProgress as base
+from ._BaseProgress import BaseProgress
 
 
 _S = TypeVar('S', bound='Filler')
 
 
-class Filler(base.BaseProgress):
+class Filler(BaseProgress):
     """ Base class for creating a Filler.
 
     Fillers are a way to visualize progression using (typically) a single
