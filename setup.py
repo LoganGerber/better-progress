@@ -5,9 +5,9 @@ with open('README.md', 'r') as f:
 
 setup(
     name='better-progress',
-    version='1.0.0',
+    version='1.0.3',
     description='Customize and create a progress bar string.',
-    package_dir={'better_progress': 'src'},
+    packages=['better_progress'],
     classifiers=[
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',
