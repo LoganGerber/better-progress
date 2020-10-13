@@ -8,10 +8,10 @@ from typing import TypeVar
 from ._IPrefixSuffix import IPrefixSuffix
 
 
-_S = TypeVar('S', bound='BaseProgress')
+_SelfType = TypeVar('_SelfType', bound='BaseProgress')
 
 
-class BaseProgress(IPrefixSuffix):
+class BaseProgress(IPrefixSuffix, abc.ABC):
     """ Base class for things that can progress toward a max value.
 
     NOTE: This class contains an abstract method, and should therefore never be
@@ -47,7 +47,7 @@ class BaseProgress(IPrefixSuffix):
         """ Get the currently set maximum value."""
         return self._max_value
 
-    def set_max_value(self: _S, val: float) -> _S:
+    def set_max_value(self: _SelfType, val: float) -> _SelfType:
         """ Change the maximum value for the tracked number.
 
         If the maximum value is set below the current value, and the value is
@@ -65,7 +65,7 @@ class BaseProgress(IPrefixSuffix):
         """ Get the currently set current value."""
         return self._current_value
 
-    def set_current_value(self: _S, val: float) -> _S:
+    def set_current_value(self: _SelfType, val: float) -> _SelfType:
         """ Change the current value of the tracked number.
 
         If the current value is set above the maximum value,a nd the value is
@@ -84,7 +84,7 @@ class BaseProgress(IPrefixSuffix):
         """ Get the value calling next() increments the current value by."""
         return self._increment_by
 
-    def set_increment_by(self: _S, val: float) -> _S:
+    def set_increment_by(self: _SelfType, val: float) -> _SelfType:
         """ Change the value calling next() increments the current value by.
 
         Keyword arguments:
@@ -97,7 +97,7 @@ class BaseProgress(IPrefixSuffix):
         """ Should the current value be capped at the max value?"""
         return self._cap_value
 
-    def set_cap_value(self: _S, cap: bool) -> _S:
+    def set_cap_value(self: _SelfType, cap: bool) -> _SelfType:
         """ Set if the tracked value should be capped at the max value.
 
         If this is set, the tracked value will never exceed the max value. If

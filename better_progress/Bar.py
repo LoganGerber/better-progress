@@ -22,7 +22,7 @@ from typing import TypeVar, List
 from ._BaseProgress import BaseProgress
 
 
-_B = TypeVar('B', bound='Bar')
+_BarSelfType = TypeVar('_BarSelfType', bound='Bar')
 
 
 class Bar(BaseProgress):
@@ -121,7 +121,7 @@ class Bar(BaseProgress):
         """ Get the number of ticks used in the progress bar."""
         return self._bar_width
 
-    def set_bar_width(self: _B, val: int) -> _B:
+    def set_bar_width(self: _BarSelfType, val: int) -> _BarSelfType:
         """ Change the number of ticks used in the progress bar.
 
         Keyword arguments:
@@ -136,7 +136,7 @@ class Bar(BaseProgress):
         """
         return self._fill_character
 
-    def set_fill_character(self: _B, val: str) -> _B:
+    def set_fill_character(self: _BarSelfType, val: str) -> _BarSelfType:
         """ Set the character(s) used to represent the filled portion of the
             progress bar.
 
@@ -152,7 +152,7 @@ class Bar(BaseProgress):
         """
         return self._empty_character
 
-    def set_empty_character(self: _B, val: str) -> _B:
+    def set_empty_character(self: _BarSelfType, val: str) -> _BarSelfType:
         """ Set the character(s) used to represent the empty portion of the
             progress bar.
 
@@ -168,7 +168,7 @@ class Bar(BaseProgress):
         """
         return self._bar_prefix
 
-    def set_bar_prefix(self: _B, val: str) -> _B:
+    def set_bar_prefix(self: _BarSelfType, val: str) -> _BarSelfType:
         """ Set the character(s) used to represent the left border of the
             progress bar.
 
@@ -182,7 +182,7 @@ class Bar(BaseProgress):
         """ Get the replacement field values for the bar_prefix."""
         return self._bar_prefix_replacement_fields
 
-    def set_bar_prefix_replacement_fields(self: _B, val: dict) -> _B:
+    def set_bar_prefix_replacement_fields(self: _BarSelfType, val: dict) -> _BarSelfType:
         """ Set the replacement field values for the bar_prefix.
 
         Keyword arguments:
@@ -197,7 +197,7 @@ class Bar(BaseProgress):
         """
         return self._bar_suffix
 
-    def set_bar_suffix(self: _B, val: str) -> _B:
+    def set_bar_suffix(self: _BarSelfType, val: str) -> _BarSelfType:
         """ Set the character(s) used to represent the right border of the
             progress bar.
 
@@ -211,7 +211,7 @@ class Bar(BaseProgress):
         """ Get the replacement field values for the bar_suffix."""
         return self._bar_suffix_replacement_fields
 
-    def set_bar_suffix_replacement_fields(self: _B, val: dict) -> _B:
+    def set_bar_suffix_replacement_fields(self: _BarSelfType, val: dict) -> _BarSelfType:
         """ Set the replacement field values for the bar_suffix.
 
         Keyword arguments:
@@ -233,7 +233,8 @@ class Bar(BaseProgress):
         return self._custom_format(self._bar_suffix, self._bar_suffix_replacement_fields)
 
 
-_I = TypeVar('I', bound='IncrementalBar')
+_IncrementalBarSelfType = TypeVar(
+    '_IncrementalBarSelfType', bound='IncrementalBar')
 
 
 class IncrementalBar(Bar):
@@ -292,7 +293,7 @@ class IncrementalBar(Bar):
         """ Get the stages each tick in the progress bar goes through."""
         return self._fill_stages
 
-    def set_fill_stages(self: _I, stages: List[str]) -> _I:
+    def set_fill_stages(self: _IncrementalBarSelfType, stages: List[str]) -> _IncrementalBarSelfType:
         """ Set the stages each tick in the progress bar goes through.
 
         Keyword arguments:

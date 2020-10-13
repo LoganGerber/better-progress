@@ -5,7 +5,7 @@ with open('README.md', 'r') as f:
 
 setup(
     name='better-progress',
-    version='1.0.3.post1',
+    version='1.0.4',
     description='Customize and create a progress bar string.',
     packages=['better_progress'],
     classifiers=[

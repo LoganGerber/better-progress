@@ -10,7 +10,7 @@ from typing import Tuple, TypeVar
 from ._BaseProgress import BaseProgress
 
 
-_S = TypeVar('S', bound='Filler')
+_SelfType = TypeVar('_SelfType', bound='Filler')
 
 
 class Filler(BaseProgress):
@@ -92,7 +92,7 @@ class Filler(BaseProgress):
         """
         return self._fill_stages
 
-    def set_fill_stages(self: _S, val: Tuple[str]) -> _S:
+    def set_fill_stages(self: _SelfType, val: Tuple[str]) -> _SelfType:
         """ Set the different stages the Filler iterates through.
 
         Keyword arguments:

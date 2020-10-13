@@ -8,7 +8,7 @@ from typing import Tuple, TypeVar
 from ._IPrefixSuffix import IPrefixSuffix
 
 
-_S = TypeVar('S', bound='Spinner')
+_SelfType = TypeVar('_SelfType', bound='Spinner')
 
 
 class Spinner(IPrefixSuffix):
@@ -72,7 +72,7 @@ class Spinner(IPrefixSuffix):
         """ Get the stages the Spinner iterates through."""
         return self._stages
 
-    def set_stages(self: _S, val: Tuple[str]) -> _S:
+    def set_stages(self: _SelfType, val: Tuple[str]) -> _SelfType:
         """ Set the different stages the Spinner iterates through.
 
         Keyword arguments:
@@ -85,7 +85,7 @@ class Spinner(IPrefixSuffix):
         """ Get the index of the current stage the Spinner is on."""
         return self._current_stage
 
-    def set_current_stage(self: _S, val: int) -> _S:
+    def set_current_stage(self: _SelfType, val: int) -> _SelfType:
         """ Set the index of the stage the Spinner should be on.
 
         Keyword arguments:
